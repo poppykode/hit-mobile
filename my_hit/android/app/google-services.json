@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "183300448751",
+    "firebase_url": "https://myhit-864d4.firebaseio.com",
+    "project_id": "myhit-864d4",
+    "storage_bucket": "myhit-864d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183300448751:android:35a744b2869efafa7c161a",
+        "android_client_info": {
+          "package_name": "com.poppykode.my_hit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183300448751-bjtf28c37s8ns2hg9o2usd9cbinsm0up.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLzAxB8JD5NZYZpSMNiSSVHLgLd9tOBqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183300448751-bjtf28c37s8ns2hg9o2usd9cbinsm0up.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
