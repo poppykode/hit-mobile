@@ -20,7 +20,7 @@ class _AccommodationSummaryScreenState
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Accomodtion Summary',
+          'Accomodation Summary',
           style: TextStyle(color: Colors.white),
         ),
         elevation: 0.0,

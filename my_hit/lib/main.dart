@@ -20,7 +20,11 @@ import './providers/timetable_provider.dart';
 import './providers/query_provider.dart';
 import './providers/events_provider.dart';
 import './providers/accomodation_provider.dart';
-
+import './providers/canteen_provider.dart';
+import './screens/canteen_summary_screen.dart';
+import './screens/canteen_purchase_screen.dart';
+import './screens/canteen_make_payment.dart';
+import './screens/canteen_buy_meal.dart';
 
 void main() {
   // SystemChrome.setPreferredOrientations([
@@ -35,12 +39,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // another way of registering a provider
+        // ChangeNotifierProvider<UserProvider>(
+        //     create: (context) => UserProvider()),
+        //   can be used for authentication
+        // ProxyProvider(update: (BuildContext context, userProvider, auth)=>Auth(''),),
         ChangeNotifierProvider.value(value: Auth()),
         ChangeNotifierProvider.value(value: UserProvider()),
         ChangeNotifierProvider.value(value: Timetable()),
         ChangeNotifierProvider.value(value: Queryrovider()),
         ChangeNotifierProvider.value(value: EventsProvider()),
-         ChangeNotifierProvider.value(value: AccomodationProvider()),
+        ChangeNotifierProvider.value(value: AccomodationProvider()),
+        ChangeNotifierProvider.value(value: CanteenProvider()),
       ],
       child: Consumer<Auth>(
         builder: (context, auth, _) => MaterialApp(
@@ -65,10 +75,15 @@ class MyApp extends StatelessWidget {
             EventsScreen.namedRoute: (ctx) => EventsScreen(),
             EventDetailsScreen.namedRoute: (ctx) => EventDetailsScreen(),
             AccomodationScreen.namedRoute: (ctx) => AccomodationScreen(),
-             AccommodationSummaryScreen.namedRoute: (ctx) => AccommodationSummaryScreen(),
+            AccommodationSummaryScreen.namedRoute: (ctx) =>
+                AccommodationSummaryScreen(),
             SignUpScreen.namedRoute: (ctx) => SignUpScreen(),
             QueryDetailScreen.namedRoute: (ctx) => QueryDetailScreen(),
-
+            CanteenSummaryScreen.namedRoute: (ctx) => CanteenSummaryScreen(),
+            CanteenPurchaseScreen.namedRoute: (ctx) => CanteenPurchaseScreen(),
+            CanteenMakePaymentScreen.namedRoute: (ctx) =>
+                CanteenMakePaymentScreen(),
+            CanteenBuyMealScreen.namedRoute: (ctx) => CanteenBuyMealScreen(),
           },
         ),
       ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_hit/providers/events_provider.dart';
 import '../widgets/dashboard_top.dart';
 import '../widgets/dashboard_bottom.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:provider/provider.dart';
 
 class DashboardScreen extends StatefulWidget {
    static const String namedRoute = '/dashboard-screen';
@@ -36,6 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
    
     super.initState();
      _firebaseMessaging.getToken().then((token){
+        Provider.of<EventsProvider>(context,listen: false).createFCMToken(token);
    print('FCM Token: $token');
  });
      _firebaseMessaging.configure(

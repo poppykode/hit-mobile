@@ -33,6 +33,8 @@ class _ComposeScreenState extends State<ComposeScreen>
     try {
       await Provider.of<Queryrovider>(context, listen: false)
           .createQuery(_queryData['subject'], _queryData['message']);
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Message Successfully Send')));
     } on HttpException catch (error) {
       print('from scren HttpException');
       print(error);
@@ -99,7 +101,10 @@ class _ComposeScreenState extends State<ComposeScreen>
                     child: _isLoading
                         ? CircularProgressIndicator()
                         : RaisedButton.icon(
-                          icon: Icon(Icons.send,color: Theme.of(context).primaryColor,),
+                            icon: Icon(
+                              Icons.send,
+                              color: Theme.of(context).primaryColor,
+                            ),
                             materialTapTargetSize:
                                 MaterialTapTargetSize.shrinkWrap,
                             shape: RoundedRectangleBorder(

@@ -65,6 +65,8 @@ class _AccomodationScreenState extends State<AccomodationScreen> {
     try {
       await Provider.of<AccomodationProvider>(context, listen: false)
           .createBooking(_selectedAccomodation);
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Booking Successfully done.')));
       Navigator.of(context).pushNamed(AccommodationSummaryScreen.namedRoute);
     } on HttpException catch (error) {
       _showErrorDialog(error.toString());

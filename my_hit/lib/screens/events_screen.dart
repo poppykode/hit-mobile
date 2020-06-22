@@ -12,13 +12,13 @@ class EventsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Events',
+          'Notices',
           style: TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: FutureBuilder(
-        future: Provider.of<EventsProvider>(context,listen: false).getEvents(),
+        future: Provider.of<EventsProvider>(context, listen: false).getEvents(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -27,28 +27,45 @@ class EventsScreen extends StatelessWidget {
               return Center(child: Text('An error occured'));
             } else {
               return Consumer<EventsProvider>(
-                child: Center(child:Text('No events found.')),
-                  builder: (ctx, events, ch) =>events.items.length <= 0 ? ch: ListView.builder(
-                    itemCount:events.items.length,
-                    itemBuilder: (ctx,i)=>InkWell(
-                      onTap:()=> Navigator.of(context).pushNamed(EventDetailsScreen.namedRoute,arguments: events.items[i].id),
-                                          child: Card(
-                        child: ListTile(
-                          leading: CircleAvatar( 
-                            child: Text(DateFormat("hh:mm").format(events.items[i].date).toString()),
-                            backgroundColor: Theme.of(context).accentColor,
-                
-                          ),
-                          title: Text(events.items[i].name.toUpperCase()),
-                          subtitle: Row(children: <Widget>[
-                            Icon(Icons.location_on),SizedBox(width: MediaQuery.of(context).size.width * 0.02,),Text(Config.capitalize(events.items[i].location))
-                          ],),
-                          trailing: Text(DateFormat("yMMMd").format(events.items[i].date).toString()) ,
-                        ),
-                      ),
-                    )
-                    ),
-                  );
+                child: Center(child: Text('No notices found.')),
+                builder: (ctx, events, ch) => events.items.length <= 0
+                    ? ch
+                    : ListView.builder(
+                        itemCount: events.items.length,
+                        itemBuilder: (ctx, i) => InkWell(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                  EventDetailsScreen.namedRoute,
+                                  arguments: events.items[i].id),
+                              child: Card(
+                                child: ListTile(
+                                  leading: CircleAvatar(
+                                    child: Text(DateFormat("hh:mm")
+                                        .format(events.items[i].date)
+                                        .toString()),
+                                    backgroundColor:
+                                        Theme.of(context).accentColor,
+                                  ),
+                                  title:
+                                      Text(events.items[i].name.toUpperCase()),
+                                  subtitle: Row(
+                                    children: <Widget>[
+                                      Icon(Icons.location_on),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.02,
+                                      ),
+                                      Text(Config.capitalize(
+                                          events.items[i].location))
+                                    ],
+                                  ),
+                                  trailing: Text(DateFormat("yMMMd")
+                                      .format(events.items[i].date)
+                                      .toString()),
+                                ),
+                              ),
+                            )),
+              );
             }
           }
         },

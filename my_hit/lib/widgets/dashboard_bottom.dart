@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../screens/personal_info_screen.dart';
 import '../screens/tabs_screen.dart';
-import '../screens/canteen_screen.dart';
 import '../screens/timetable_screen.dart';
 import '../screens/events_screen.dart';
 import '../screens/accommodation_summary_screen.dart';
 import '../screens/accomodation_screen.dart';
 import '../providers/accomodation_provider.dart';
+import '../providers/canteen_provider.dart';
+import '../screens/canteen_summary_screen.dart';
+import '../screens/canteen_purchase_screen.dart';
 
 class DashboardBottom extends StatelessWidget {
   @override
@@ -95,8 +97,12 @@ class DashboardBottom extends StatelessWidget {
           ),
         ),
         InkWell(
-          onTap: () {
-            Navigator.of(context).pushNamed(CanteenScreen.namedRoute);
+          onTap: () async {
+            await Provider.of<CanteenProvider>(context, listen: false).hasMeal()
+                ? Navigator.of(context)
+                    .pushNamed(CanteenSummaryScreen.namedRoute)
+                : Navigator.of(context)
+                    .pushNamed(CanteenPurchaseScreen.namedRoute);
           },
           child: Container(
             padding: EdgeInsets.only(right: 15.0, left: 15.0),
@@ -199,7 +205,7 @@ class DashboardBottom extends StatelessWidget {
                     width: deviceSize.size.width * 0.05,
                   ),
                   Text(
-                    'Events',
+                    'Notices',
                     style:
                         TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
                   )
@@ -210,10 +216,12 @@ class DashboardBottom extends StatelessWidget {
         ),
         InkWell(
           onTap: () async {
-            await Provider.of<AccomodationProvider>(context, listen: false).hasAccomodation()
-                ?  Navigator.of(context)
-                    .pushNamed(AccommodationSummaryScreen.namedRoute): Navigator.of(context).pushNamed(AccomodationScreen.namedRoute);
-                
+            await Provider.of<AccomodationProvider>(context, listen: false)
+                    .hasAccomodation()
+                ? Navigator.of(context)
+                    .pushNamed(AccommodationSummaryScreen.namedRoute)
+                : Navigator.of(context)
+                    .pushNamed(AccomodationScreen.namedRoute);
           },
           child: Container(
             padding: EdgeInsets.only(right: 15.0, left: 15.0),

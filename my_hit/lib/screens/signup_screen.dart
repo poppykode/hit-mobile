@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../providers/auth.dart';
 import '../widgets/input_image.dart';
 import '../providers/timetable_provider.dart';
-import '../models/HttpException.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String namedRoute = '/sign-up-screen';
@@ -72,20 +71,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
           _authData['email'],
           couse,
           _authData['password']);
-
       Navigator.of(context).pop();
-    } on HttpException catch (error) {
+    } catch (error) {
       var errorMessage = 'Signup failed.';
       if (error.toString().contains('username already exists.')) {
         errorMessage = 'username already exists';
       } else if (error.toString().contains('email already exists.')) {
         errorMessage = 'email already exists';
-      } else if (error.toString().contains('Accommodation in ')) {
-        errorMessage = error.toString();
+      } else if (error.toString().contains('Incorrect type')) {
+        errorMessage = 'Please Select a Course';
+      } else if (error.toString().contains('Enter a valid email address')) {
+        errorMessage = 'Enter a valid email address';
       }
-      _showErrorDialog(errorMessage);
-    } catch (error) {
-      const errorMessage = 'Something went wrong';
+      print('error pa screen');
+      print(error);
       _showErrorDialog(errorMessage);
     }
 
@@ -354,7 +353,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               height: MediaQuery.of(context).size.height * 0.02,
                             ),
                             FlatButton(
-                              
                               child: Text(
                                 'LOGIN INSTEAD',
                                 style: TextStyle(
